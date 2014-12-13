@@ -613,7 +613,21 @@ mouse-1: Display Line and Column Mode Menu")
        '((((class color))
           :foreground "white" :background "sky blue" :weight bold :inherit mode-line)
          (t (:weight bold)))
-       "face to fontify evil replace state"
+       "face to fontify evil operator state"
+       :group 'powerline)
+
+     (defface powerline-evil-iedit-face
+       '((((class color))
+          :foreground "white" :background "firebrick" :weight bold :inherit mode-line)
+         (t (:weight bold)))
+       "face to fontify evil iedit state"
+       :group 'powerline)
+
+     (defface powerline-evil-iedit-insert-face
+       '((((class color))
+          :foreground "white" :background "#0F9" :weight bold :inherit mode-line)
+         (t (:weight bold)))
+       "face to fontify evil iedit insert state"
        :group 'powerline)
 
      (defun powerline-evil-face (active)
