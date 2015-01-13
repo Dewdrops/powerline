@@ -425,14 +425,14 @@ static char * %s[] = {
 ;;;###autoload
 (defpowerline powerline-buffer-id
   #("%12b" 0 4
-   (local-map
-    (keymap
-     (mode-line keymap
-                (mouse-2 . swbuff-kill-this-buffer)
-                (mouse-3 . swbuff-switch-to-next-buffer)
-                (mouse-1 . swbuff-switch-to-previous-buffer)))
-    mouse-face mode-line-highlight
-    help-echo "mouse-1: Previous buffer\nmouse-2: Kill buffer\nmouse-3: Next buffer")))
+    (local-map
+     (keymap
+      (mode-line keymap
+                 (mouse-2 . swbuff-kill-this-buffer)
+                 (mouse-3 . swbuff-switch-to-next-buffer)
+                 (mouse-1 . swbuff-switch-to-previous-buffer)))
+     mouse-face mode-line-highlight
+     help-echo "mouse-1: Previous buffer\nmouse-2: Kill buffer\nmouse-3: Next buffer")))
 
 ;;;###autoload
 (defpowerline powerline-recursive-left
@@ -494,6 +494,31 @@ static char * %s[] = {
 mouse-2: toggle rest visibility\nmouse-3: go to end"
    'local-map which-func-keymap
    'face 'which-func))
+
+;;;###autoload
+(defpowerline powerline-life
+  (propertize
+   (concat "Generation " life-generation-string)))
+
+;;;###autoload
+(defpowerline powerline-fancy-battery
+  (propertize
+   (when fancy-battery-last-status
+     (let* ((time (cdr (assq ?t fancy-battery-last-status)))
+            (percentage (cdr (assq ?p fancy-battery-last-status)))
+            (status (if (or fancy-battery-show-percentage
+                            (string= time "N/A"))
+                        (and percentage (concat (concat percentage "%%")
+                                                " (" time ")"))
+                      time)))
+       (if status (concat " " status)
+         ;; Battery status is not available
+         "N/A")))
+   'mouse-face 'mode-line-highlight
+   'face (pcase (cdr (assq ?b fancy-battery-last-status))
+           ("!"  'fancy-battery-critical)
+           ("+"  ' fancy-battery-charging)
+           (_ 'fancy-battery-discharging))))
 
 ;;;###autoload
 (defpowerline powerline-position

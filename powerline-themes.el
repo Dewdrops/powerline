@@ -225,6 +225,14 @@
                   (powerline-raw "[" face1)
                   (powerline-which-func)
                   (powerline-raw "]" face1)))
+               (when (eq major-mode 'life-mode)
+                 (list
+                  (powerline-raw "[" face1)
+                  (powerline-life face1)
+                  (powerline-raw "]" face1 'r)))
+               ;; (when (and (boundp 'fancy-battery-mode) fancy-battery-mode)
+               ;;   (list
+               ;;    (powerline-fancy-battery)))
                (list
                 (when (and (boundp 'wc-mode) wc-mode)
                   (powerline-wc-mode face1 'r))
@@ -330,6 +338,11 @@
                   (powerline-raw "[" face2)
                   (powerline-which-func)
                   (powerline-raw "]" face2)))
+               (when (eq major-mode 'life-mode)
+                 (list
+                  (powerline-raw "[" face2)
+                  (powerline-life face2)
+                  (powerline-raw "]" face2 'r)))
                (list
                 (when (and (boundp 'wc-mode) wc-mode)
                   (powerline-wc-mode face2 'r))
