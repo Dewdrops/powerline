@@ -581,7 +581,7 @@ mouse-1: Display Line and Column Mode Menu")
 (eval-after-load 'paradox
   '(defpowerline powerline-paradox
      (concat
-      (if paradox--current-filter ("[" paradox--current-filter "]"))
+      (if paradox--current-filter (concat "[" paradox--current-filter "]"))
       (if paradox--upgradeable-packages-any?
           (concat "  Upgrade:" (int-to-string paradox--upgradeable-packages-number)))
       (if package-menu--new-package-list
