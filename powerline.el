@@ -731,6 +731,24 @@ mouse-1: Display Line and Column Mode Menu")
            (powerline-width (cdr values))))
     0))
 
+;; Define swbuff-switch-to-next-buffer in case we don't
+;; yet have it.
+(when (not (fboundp 'swbuff-switch-to-next-buffer))
+        (defun swbuff-switch-to-next-buffer ()
+               (interactive)
+               (next-buffer)))
+
+;; Same for swbuff-switch-to-previous-buffer and swbuff-kill-this-buffer.
+(when (not (fboundp 'swbuff-switch-to-previous-buffer))
+        (defun swbuff-switch-to-previous-buffer ()
+               (interactive)
+               (previous-buffer)))
+
+
+(when (not (fboundp 'swbuff-kill-this-buffer))
+        (defun swbuff-kill-this-buffer ()
+               (interactive)
+               (kill-buffer)))
 
 (provide 'powerline)
 
